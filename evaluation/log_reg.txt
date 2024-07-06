@@ -1,0 +1,29 @@
+sampling type: up-sampling
+
+best_params: {}
+
+best_estimator: Pipeline(steps=[('scaler', StandardScaler()), ('model', LogisticRegression())])
+
+================================================================================================
+
+Confusion Matrix:
+
+[[513860  39005]
+ [128169 424612]]
+
+              precision    recall  f1-score   support
+
+           0       0.80      0.93      0.86    552865
+           1       0.92      0.77      0.84    552781
+
+    accuracy                           0.85   1105646
+   macro avg       0.86      0.85      0.85   1105646
+weighted avg       0.86      0.85      0.85   1105646
+
+
+F1 Score: 0.8355230923319409
+
+Accuracy: 0.8487997062350879
+
+ROC AUC Score: 0.8487935785210255
+

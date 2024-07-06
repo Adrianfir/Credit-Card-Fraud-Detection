@@ -1,0 +1,30 @@
+sampling type: under-sampling
+
+best_params: {}
+
+best_estimator: Pipeline(steps=[('scaler', StandardScaler()),
+                ('model', GradientBoostingClassifier())])
+
+================================================================================================
+
+Confusion Matrix:
+
+[[2781  114]
+ [ 175 2721]]
+
+              precision    recall  f1-score   support
+
+           0       0.94      0.96      0.95      2895
+           1       0.96      0.94      0.95      2896
+
+    accuracy                           0.95      5791
+   macro avg       0.95      0.95      0.95      5791
+weighted avg       0.95      0.95      0.95      5791
+
+
+F1 Score: 0.949572500436224
+
+Accuracy: 0.9500949749611466
+
+ROC AUC Score: 0.9500967924312254
+
