@@ -1,0 +1,36 @@
+{
+  "data":
+          {
+            "path":"/Users/pouyafirouzmakan/Desktop/fraudTest.csv",
+            "data_report_path": "/Users/pouyafirouzmakan/Desktop/Credit-Card-Fraud-Detection/data_summary/data_summary.txt",
+            "label": "is_fraud",
+            "sample_num": 0.5
+          },
+
+  "model": {
+            "name": "rand_forrest",
+            "log_reg": {"max_iter": 1000,
+              "solver":  "saga",
+              "C": [1],
+              "penalty": "l2"
+            },
+
+            "knn": {"n_neighbors": [3]},
+
+            "rand_forrest": {"n_estimators": 100}
+
+           },
+
+  "pca": {"n_components":  90},
+
+  "output_path": "/Users/pouyafirouzmakan/Desktop/Credit-Card-Fraud-Detection/evaluation/",
+
+  "dumped_path": "/Users/pouyafirouzmakan/Desktop/Credit-Card-Fraud-Detection/dumped_model/",
+
+  "grid_s": {},
+
+  "test_size": 0.3,
+
+  "seed": 42
+
+}

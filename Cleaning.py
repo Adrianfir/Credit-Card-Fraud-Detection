@@ -1,0 +1,27 @@
+
+import numpy as np 
+import pandas as pd 
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class Cleaning(BaseEstimator, TransformerMixin):
+
+    def __init__(self, drop_columns=None):
+        self.drop_columns = drop_columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        data = X
+
+        if self.drop_columns:
+            data.drop(self.drop_columns, axis=1, inplace=True)
+
+        data['age_year'] = pd.Timestamp.now().year - pd.to_datetime(data['dob']).dt.year
+        data.drop('dob', axis=1, inplace=True)
+
+        label_encoder = LabelEncoder()
+        for col in ['merchant', 'city', 'state', 'gender', 'job', 'category']:
+            data[col] = label_encoder.fit_transform(data[col])
+
+        return data
