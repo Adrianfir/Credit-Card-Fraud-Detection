@@ -10,15 +10,19 @@
 
   "model": {
             "name": "rand_forrest",
-            "log_reg": {"max_iter": 1000,
+            "log_reg": {"max_iter": 50000,
               "solver":  "saga",
-              "C": [1],
+              "C": [0.2, 0.4, 0.6, 0.8, 1],
               "penalty": "l2"
             },
 
             "knn": {"n_neighbors": [3]},
 
-            "rand_forrest": {"n_estimators": 100}
+            "rand_forrest": {"n_estimators": 100, "max_feature": 3},
+
+            "adaboost": {"n_estimators": 100},
+
+            "gradboost": {"n_estimators": 100}
 
            },
 
