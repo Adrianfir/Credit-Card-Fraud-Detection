@@ -8,11 +8,11 @@ class Cleaning(BaseEstimator, TransformerMixin):
     def __init__(self, drop_columns=None):
         self.drop_columns = drop_columns
 
-    def fit(self, X, y=None):
+    def fit(self, x, y=None):
         return self
 
-    def transform(self, X, y=None):
-        data = X
+    def transform(self, x, y=None):
+        data = x
 
         if self.drop_columns:
             data.drop(self.drop_columns, axis=1, inplace=True)
