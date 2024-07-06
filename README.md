@@ -1,6 +1,6 @@
 # Fraud-Detection
 
-This repository is to apply Logistic_Regression for fraud detection.
+This repository is dedicated for fraud detection on CreditCard dataset. 
 
 To find the data set used in this project use the following link:
 
@@ -30,8 +30,11 @@ Important Note: In tasks related to fraud-detection, the dataset is usually imba
 
 
 
-	Note: The explained process would just apply to the "train" sets (after using sklearn.preprocessing.train_test_split()) and these operations must not be in the piplines. However, imblearn package has the feature to be in the pipeline and it just would be applied to train-set during training the model and applying cross-validation.
+	Note: to apply the explained process the whole dataset (including train-set and test-set concatinated and formed "df") should be considered. The aforementioned link has both train-set and test-set. So, before anything, we have concatinated them to form df and then apply pre-processing, including up-sampling or down-sampling.
 	 
 
 
 ============================================================================================
+## Results:
+
+Although the results (e.g., f1-score) are slightly better using up-sampling, using down-samplign would bring about much less training time with slightly less accuracy and scores.

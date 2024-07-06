@@ -6,13 +6,14 @@ __authur: str = "Pouya 'Adrian' Firouzmakan"
 
 __all__ = ['generate_dataset_report', 'pre_processing', 'final_report']
 
-import numpy as np
-import pandas as pd
 from io import StringIO
 from sklearn.model_selection import GridSearchCV, train_test_split
-from sklearn.metrics import f1_score, accuracy_score, confusion_matrix, roc_auc_score, classification_report
-
+from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import RandomUnderSampler
+from sklearn.metrics import (confusion_matrix, f1_score, classification_report,
+                             accuracy_score, roc_auc_score)
 from Cleaning import Cleaning
+from config.config import config
 
 
 def generate_dataset_report(df, config):
@@ -37,22 +38,28 @@ def generate_dataset_report(df, config):
         file.write("\n")
 
 
-
-def pre_processing(df):
+def pre_processing(df, drop_columns):
     """
     :param df:
     :return:
     """
+
     x = df.drop('is_fraud', axis=1)
     y = df['is_fraud']
 
     cleaner = Cleaning(drop_columns)
     x = cleaner.fit_transform(x, y)
 
-    up_sampling = SMOTE(random_state=42)
-    x, y = up_sampling.fit_resample(x, y) 
+    sampler = None
+    if config['data']['sampling'] == 'up':
+        sampler = SMOTE(random_state=config['seed'])
+    elif config['data']['sampling'] == 'under':
+        sampler = RandomUnderSampler(random_state=config['seed'])
+    x, y = sampler.fit_resample(x, y)
 
-    xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.3, random_state=42)
+    xtrain, xtest, ytrain, ytest = train_test_split(x, y,
+                                                    test_size=config['data']['test_size'],
+                                                    random_state=config['seed'])
 
     return xtrain, xtest, ytrain, ytest
 
@@ -68,9 +75,10 @@ def final_report(best_estimator, best_params,
     """
     prediction = best_estimator.predict(xtest)
     lines = list()
+    lines.append((f"sampling type: {config['data']['sampling']}-sampling"))
     lines.append(f'best_params: {best_params}')
     lines.append(f'best_estimator: {best_estimator}')
-    lines.append('='*96)
+    lines.append('=' * 96)
 
     # Evaluating our trained model
     lines.append("Confusion Matrix:")
@@ -80,6 +88,6 @@ def final_report(best_estimator, best_params,
     lines.append(f"Accuracy: {accuracy_score(ytest, prediction)}")
     lines.append(f"ROC AUC Score: {roc_auc_score(ytest, prediction)}")
 
-    with open (config['output_path'], 'w') as report:
+    with open(config['output_path'], 'w') as report:
         for l in lines:
             report.write(l + "\n\n")

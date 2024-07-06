@@ -1,7 +1,7 @@
 DataFrame Info:
 <class 'pandas.core.frame.DataFrame'>
 
-Index: 1852394 entries, 244469 to 121958
+Int64Index: 1852394 entries, 244469 to 121958
 
 Data columns (total 23 columns):
 
@@ -79,6 +79,5 @@ is_fraud    1852394.0  5.210015e-03  7.199217e-02  0.000000e+00  0.000000e+00  0
 ================================================================================================
 
 Value Counts for is_fraud:
-is_fraud
 0    1842743
 1       9651
